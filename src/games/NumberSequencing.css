@@ -1,0 +1,35 @@
+.number-sequencing {
+  text-align: center;
+  padding: 20px;
+}
+
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.sequence-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.number-box {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin: 10px;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 50px;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.number-box:active {
+  background-color: #ddd;
+}
+
+.score {
+  margin-top: 20px;
+}

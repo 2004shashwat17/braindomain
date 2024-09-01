@@ -1,0 +1,119 @@
+/* Center the game content */
+.game-container {
+  text-align: center;
+  margin-top: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Main title styling */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Word display styling */
+.word-container {
+  margin: 20px 0;
+}
+
+.word-container h2 {
+  font-size: 2rem;
+  color: #555;
+}
+
+.word-container span {
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Start button styling */
+.start-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #0056b3;
+}
+
+/* Message display styling */
+.message-container {
+  margin-top: 20px;
+}
+
+.message-container p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Difficulty level container */
+.difficulty-container {
+  margin: 20px 0;
+}
+
+.difficulty-container label {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.difficulty-container select {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Animation for word appearance */
+.word-container span {
+  display: inline-block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .word-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .start-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .message-container p {
+    font-size: 1rem;
+  }
+}
