@@ -7,6 +7,7 @@ const WordBuilding = () => {
     const [grammar, setGrammar] = useState(0);
     const [structure, setStructure] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
+    const [creativity, setCreativity] = useState(0); // Added new factor
     const canvasRef = useRef(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [timer, setTimer] = useState(null);
@@ -25,10 +26,12 @@ const WordBuilding = () => {
         }
     };
 
+    // Randomly generate percentage values (from 80% to 100%)
     const generateRandomValues = () => {
-        setGrammar((Math.random() * (5 - 4) + 4).toFixed(1));
-        setStructure((Math.random() * (5 - 4) + 4).toFixed(1));
-        setAccuracy((Math.random() * (5 - 4) + 4).toFixed(1));
+        setGrammar((Math.random() * (100 - 80) + 80).toFixed(1));
+        setStructure((Math.random() * (100 - 80) + 80).toFixed(1));
+        setAccuracy((Math.random() * (100 - 80) + 80).toFixed(1));
+        setCreativity((Math.random() * (100 - 80) + 80).toFixed(1)); // Creativity between 80% to 100%
     };
 
     const startDrawing = (e) => {
@@ -81,9 +84,10 @@ const WordBuilding = () => {
                 <button onClick={() => setLevel('hard')}>Hard</button>
                 <div className="result-container">
                     <h3>Results</h3>
-                    <p>Grammar: {grammar}</p>
-                    <p>Structure: {structure}</p>
-                    <p>Accuracy: {accuracy}</p>
+                    <p>Grammar: {grammar}%</p>
+                    <p>Structure: {structure}%</p>
+                    <p>Accuracy: {accuracy}%</p>
+                    <p>Creativity: {creativity}%</p> {/* Display Creativity */}
                 </div>
             </div>
         </div>
@@ -91,4 +95,3 @@ const WordBuilding = () => {
 };
 
 export default WordBuilding;
-

@@ -2,6 +2,7 @@
 
 /* Styles specific to the body when Rewards is rendered */
 .body-rewards {
+  height: 600px;
   background-color: #4f094b; /* Example: Light grey background color */
   font-family: 'Courier New', Courier, monospace; /* Example: Font family */
 }
@@ -10,7 +11,7 @@
 .rewards-section {
   background-image: url("../assets/rewards2.avif");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   padding: 20px;
   background-color: #f7f7f7;
   border-radius: 10px;

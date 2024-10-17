@@ -33,10 +33,10 @@ const About = () => {
       {/* Stakeholders Section */}
       <section className="stakeholders-section">
         <h2>Key Stakeholders</h2>
-        <p>Founder & Team Leader: [Ujjawal Kumar]</p>
+        <p>Team Leader : [Ujjawal Kumar]</p>
         <p>Healthcare Partners: [WHO (World Health Organization)]</p>
         <p>Educational Advisors: [IES(Indian Educational Services)]</p>
-        <p>Technical Team: [Shashwat Saxena(Devloper)/Vibhor Jain&Sohani(AI Expert)/Ronit&Palak Sharma(Designers&Researcher)]</p>
+        <p>Technical Team: [Shashwat Saxena(Devloper)/Vibhor Jain & Sohani(AI Expert)/Ronit & Palak Sharma(Designers&Researcher)]</p>
       </section>
 
       {/* Commitment Section */}

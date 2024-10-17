@@ -1,6 +1,8 @@
 .maze-game {
   text-align: center;
   padding: 20px;
+  background-image: url("../assets/maze.jpg");
+  height: 660px;
 }
 
 .difficulty-selector {
@@ -10,9 +12,9 @@
 .maze-area {
   display: inline-block;
   margin: 0 auto;
-  padding: 10px;
+  padding: 30px;
   border: 2px solid #000;
-  background-color: #f0f0f0;
+  background-color: #3b0606;
 }
 
 .maze-row {
@@ -20,8 +22,8 @@
 }
 
 .maze-cell {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 40px;
   border: 1px solid #000;
   display: flex;
   justify-content: center;

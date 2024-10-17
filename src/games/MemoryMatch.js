@@ -6,30 +6,44 @@ const MemoryMatch = () => {
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [moves, setMoves] = useState(0);
-  const [difficulty, setDifficulty] = useState("low");
-  const [score, setScore] = useState(0); 
-  const [levelCleared, setLevelCleared] = useState(false); // Track if the level is cleared
+  const [score, setScore] = useState(0);
+  const [levelCleared, setLevelCleared] = useState(false);
 
-  const cardImages = ["🐶", "🐱", "🐭", "🐰", "🦊", "🐻", "🐼", "🐯", "🦁", "🐮"];
+  const cardImages = [
+    "🐶",
+    "🐱",
+    "🐭",
+    "🐰",
+    "🦊",
+    "🐻",
+    "🐼",
+    "🐯",
+    "🦁",
+    "🐮",
+  ];
 
   useEffect(() => {
     initializeGame();
-  }, [difficulty]);
+  }, []);
 
   const initializeGame = () => {
-    let pairs = difficulty === "low" ? 3 : difficulty === "medium" ? 6 : 10;
+    const pairs = 6; // Hardcoded to 6 pairs for simplicity
     const shuffledCards = [
       ...cardImages.slice(0, pairs),
       ...cardImages.slice(0, pairs),
     ]
       .sort(() => Math.random() - 0.5)
-      .map((card, index) => ({ id: index, content: card, flipped: false }));
+      .map((card, index) => ({
+        id: index,
+        content: card,
+        flipped: false,
+      }));
 
     setCards(shuffledCards);
     setFlippedCards([]);
     setMatchedCards([]);
     setMoves(0);
-    setLevelCleared(false); // Reset the level cleared status
+    setLevelCleared(false);
   };
 
   const flipCard = (id) => {
@@ -47,73 +61,66 @@ const MemoryMatch = () => {
   };
 
   useEffect(() => {
-    // Check if the game is won
-    if (matchedCards.length === cards.length && cards.length > 0 && !levelCleared) {
-      setScore(score + 1); // Increment score when a level is cleared
-      setLevelCleared(true); // Mark the level as cleared
+    if (
+      matchedCards.length === cards.length &&
+      cards.length > 0 &&
+      !levelCleared
+    ) {
+      setScore(score + 1);
+      setLevelCleared(true);
     }
   }, [matchedCards, cards.length, score, levelCleared]);
 
+  // Function to read the instructions
+  const readInstructions = () => {
+    const instructions = "Flip two cards at a time and try to match them. Match all pairs to win!";
+    const speech = new SpeechSynthesisUtterance(instructions);
+    speech.lang = "en-US"; // Set the language
+    window.speechSynthesis.speak(speech);
+  };
+
   return (
-    <div className="memory-match">
-      {/* <h2>Memory Match Game</h2> */}
-      <div className="difficulty-selector">
-        <label>
-          <input
-            type="radio"
-            name="difficulty"
-            value="low"
-            checked={difficulty === "low"}
-            onChange={() => setDifficulty("low")}
-          />
-          Low
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="difficulty"
-            value="medium"
-            checked={difficulty === "medium"}
-            onChange={() => setDifficulty("medium")}
-          />
-          Medium
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="difficulty"
-            value="hard"
-            checked={difficulty === "hard"}
-            onChange={() => setDifficulty("hard")}
-          />
-          Hard
-        </label>
+    <div className="memory-match-container">
+      {/* Game Instructions */}
+      <div className="instructions">
+        <h2>How to Play 🕹️</h2>
+        <p>Flip two cards at a time and try to match them. Match all pairs to win!</p>
+        {/* Speech Button */}
+        <button onClick={readInstructions} className="speech-button">
+          Read Instructions
+        </button>
       </div>
-      <div className="board">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className={`card ${
-              flippedCards.includes(index) || matchedCards.includes(index)
-                ? "flipped"
-                : ""
-            }`}
-            onClick={() =>
-              flippedCards.length < 2 &&
-              !flippedCards.includes(index) &&
-              !matchedCards.includes(index) &&
-              flipCard(index)
-            }
-          >
-            <div className="card-inner">
-              <div className="card-front">❓</div>
-              <div className="card-back">{card.content}</div>
+
+      {/* Game Content */}
+      <div className="memory-match">
+        <div className="board">
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className={`card ${
+                flippedCards.includes(index) || matchedCards.includes(index)
+                  ? "flipped"
+                  : ""
+              }`}
+              onClick={() =>
+                flippedCards.length < 2 &&
+                !flippedCards.includes(index) &&
+                !matchedCards.includes(index) &&
+                flipCard(index)
+              }
+            >
+              <div className="card-inner">
+                <div className="card-front">❓</div>
+                <div className="card-back">{card.content}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="stats">
+          <p>Moves: {moves}</p>
+          <p>Score: {score}</p>
+        </div>
       </div>
-      <p>Moves: {moves}</p>
-      <p>Score: {score}</p> {/* Display the score */}
     </div>
   );
 };

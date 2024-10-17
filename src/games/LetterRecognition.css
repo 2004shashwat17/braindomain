@@ -1,8 +1,14 @@
+/* SignLanguageGame.css */
+
 .sign-language-game {
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #000000;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  background-size: cover; /* Ensure background fully covers the container */
+  background-position: center; /* Center the background */
+  background-repeat: no-repeat; /* Prevent background from repeating */
 }
 
 .game-container {
@@ -10,6 +16,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 100%; /* Ensure the content fills the height */
 }
 
 .sign-gallery {
@@ -32,13 +39,14 @@
 .camera-view {
   width: 300px;
   height: 200px;
-  background-color: #ddd;
+  background-color: #333; /* Change the background color here */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   border: 2px solid #ccc;
 }
+
 
 .sign-recognition {
   margin: 20px 0;

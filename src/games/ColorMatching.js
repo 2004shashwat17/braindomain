@@ -1,30 +1,8 @@
 import React, { useState } from 'react';
 import './ColorMatching.css';
-
-// const stories = [
-//   {
-//     title: 'Cyber Awareness',
-//     videoUrl: 'https://www.youtube.com/embed/yiKeLOKc1tw',
-//     modes: {
-//       easy: [
-//         { question: 'What is phishing?', options: ['Deception', 'A secure website', 'A type of fish', 'None'], correct: 'Deception' },
-//         // other easy questions
-//       ],
-//       medium: [
-//         { question: 'Which is a common phishing tactic?', options: ['Offering prizes', 'Sending helpful information', 'Giving compliments', 'None'], correct: 'Offering prizes' },
-//         // other medium questions
-//       ],
-//       hard: [
-//         { question: 'What is a VPN?', options: ['Virtual Private Network', 'Very Private Network', 'Virtual Public Network', 'None'], correct: 'Virtual Private Network' },
-//         // other hard questions
-//       ],
-//     },
-//   },
-//   // other stories...
-// ];
 const stories = [
   {
-    title: 'Cyber Awareness',
+    // title: 'Cyber Awareness',
     videoUrl: 'https://www.youtube.com/embed/yiKeLOKc1tw',
     modes: {
       easy: [
@@ -51,7 +29,7 @@ const stories = [
     },
   },
   {
-    title: 'Good Touch/Bad Touch',
+    // title: 'Good Touch/Bad Touch',
     videoUrl: 'https://www.youtube.com/embed/TmxCvx2D2B8',
     modes: {
       easy: [
@@ -78,7 +56,7 @@ const stories = [
     },
   },
   {
-    title: 'Safety Rules',
+    // title: 'Safety Rules',
     videoUrl: 'https://www.youtube.com/embed/aT61nwd5U-s',
     modes: {
       easy: [
@@ -105,7 +83,7 @@ const stories = [
     },
   },
   {
-    title: 'Personal Hygiene',
+    // title: 'Personal Hygiene',
     videoUrl: 'https://www.youtube.com/embed/D5BtnvQqbWs',
     modes: {
       easy: [
@@ -132,7 +110,7 @@ const stories = [
     },
   },
   {
-    title: 'Good/Bad Habits',
+    // title: 'Good/Bad Habits',
     videoUrl: 'https://www.youtube.com/embed/D5BtnvQqbWs',
     modes: {
       easy: [

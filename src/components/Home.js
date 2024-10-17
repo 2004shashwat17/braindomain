@@ -4,7 +4,7 @@ import "./Home.css";
 
 const Home = () => {
   const [showChat, setShowChat] = useState(false);
-  const [showPopup, setShowPopup] = useState(true);
+  // const [showPopup, setShowPopup] = useState(true);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -19,9 +19,10 @@ const Home = () => {
     { name: "Shape Sorter🥙", path: "/shape-sorter", type: "normal" },
     { name: "Social Awareness🚀", path: "/color-quiz", type: "normal" },
     { name: "Number Sequencing⚙️", path: "/puzzle-game", type: "normal" },
-    { name: "Puzzle Game🧩", path: "/math-game", type: "normal" },
+    { name: "Pong Game🧩", path: "/math-game", type: "normal" },
     { name: "Maze Game🌽", path: "/maze", type: "normal" },
-    { name: "Speech Game🤥", path: "/word-search", type: "special" },
+    { name: "SoundBoard 🎼", path: "/soundboard", type: "special" },
+    { name: "Tic Tac Toe 🎫", path: "/word-search", type: "normal" },
     { name: "Sign Language💌", path: "/letter", type: "special" },
     { name: "Hand Writing🅰️", path: "/building", type: "special" },
     { name: "Sound Identification🔊", path: "/sound", type: "special" },
@@ -44,44 +45,10 @@ const Home = () => {
     setFilteredGames(sortedGames);
   }, [sortCriteria]);
 
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setShowPopup(false);
-      }
-    };
-    window.addEventListener("keydown", handleEscape);
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
-
-  useEffect(() => {
-    const checkPopup = () => {
-      const registrationTimestamp = localStorage.getItem(
-        "registrationTimestamp"
-      );
-      if (registrationTimestamp) {
-        const now = new Date().getTime();
-        const elapsed = now - registrationTimestamp;
-        const tenMinutes = 10 * 60 * 1000; // 10 minutes in milliseconds
-        if (elapsed >= tenMinutes) {
-          setShowPopup(true);
-        }
-      }
-    };
-
-    checkPopup(); // Check on component mount
-    const interval = setInterval(checkPopup, 60 * 1000); // Check every minute
-
-    return () => clearInterval(interval); // Cleanup the interval on unmount
-  }, []);
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && age && gender && isSpeciallyAbled !== "" && termsAccepted) {
-      setShowPopup(false);
+      // setShowPopup(false);
       // Save profile data to local storage
       const profileData = { name, age, gender, isSpeciallyAbled };
       localStorage.setItem("profile", JSON.stringify(profileData));
@@ -102,9 +69,9 @@ const Home = () => {
     }
   };
 
- const toggleChat = () => {
-    setShowChat(!showChat);
-  };
+//  const toggleChat = () => {
+//     setShowChat(!showChat);
+//   };
   const handleSortChange = (e) => {
     setSortCriteria(e.target.value);
   };
@@ -118,120 +85,8 @@ const Home = () => {
       price: "₹500/year",
     }
   ];
-    // {
-    //   title: "Monthly Subscription",
-    //   description: "Access all premium content for a month.",
-    //   price: "$15/month",
-    // },
-    // {
-    //   title: "Yearly Subscription",
-    //   description: "Access all premium content for a year.",
-    //   price: "$100/year",
-    // },
   return (
     <div className="home">
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <button
-              className="close-button"
-              onClick={() => setShowPopup(false)}
-            >
-              ×
-            </button>
-            <h2>Please Provide Your Details</h2>
-            <form onSubmit={handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </label>
-              <br />
-              <br />
-              <label>
-                Age:
-                <input
-                  type="number"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  required
-                />
-              </label>
-              <br />
-              <br />
-              <label>Gender:</label>
-              <div>
-                <label>
-                  <input
-                    type="radio"
-                    value="male"
-                    checked={gender === "male"}
-                    onChange={() => setGender("male")}
-                  />
-                  Male
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="female"
-                    checked={gender === "female"}
-                    onChange={() => setGender("female")}
-                  />
-                  Female
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="other"
-                    checked={gender === "other"}
-                    onChange={() => setGender("other")}
-                  />
-                  Other
-                </label>
-              </div>
-              <br />
-              <label>Is your child special?</label>
-              <div>
-                <label>
-                  <input
-                    type="radio"
-                    value="yes"
-                    checked={isSpeciallyAbled === "yes"}
-                    onChange={() => setIsSpeciallyAbled("yes")}
-                  />
-                  Yes
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="no"
-                    checked={isSpeciallyAbled === "no"}
-                    onChange={() => setIsSpeciallyAbled("no")}
-                  />
-                  No
-                </label>
-              </div>
-              <br />
-              <label>
-                <input
-                  type="checkbox"
-                  checked={termsAccepted}
-                  onChange={() => setTermsAccepted(!termsAccepted)}
-                  required
-                />
-                I accept the Terms and Conditions
-              </label>
-              <br />
-              <button type="submit">Register</button>
-            </form>
-          </div>
-        </div>
-      )}
-
       <header>
         <nav className="header-nav">
           <Link to="/about" className="about-button">
@@ -249,7 +104,8 @@ const Home = () => {
             WeeklyReports🔁
           </Link>
           {/* Profile Icon */}
-          <Link to="/profile" className="profile-icon">
+          {/* <Link to="/profile" className="profile-icon"> */}
+          <Link className="profile-icon">
             <svg
               width="70"
               height="50"
@@ -269,6 +125,24 @@ const Home = () => {
           <i>Brain Domain🧠</i>
         </h1>
       </header>
+      <br />
+      <section className="header2">
+  <nav className="header-nav2">
+    <div className="header-rewards2">
+      <br />
+      <Link to="/about" className="about-button2">Worksheets 📝</Link>
+      {/* <Link to="/reward" className="about-button2">More Games🎯</Link> */}
+      {/* <Link to="/score" className="about-button2">Lesson Plans🪙</Link> */}
+      <Link to="/score" className="about-button2">Activities😶‍🌫️</Link>
+      <Link to="/score" className="about-button2">Work Books📔</Link>
+      <Link to="/score" className="about-button2">Exercise⛹🏻‍♂️</Link>
+      <br />
+      <Link to="/score" className="about-button2">Story💫</Link>
+      <br />
+      <Link to="/score" className="about-button2">Song🎶</Link>
+    </div>
+  </nav>
+</section>
       <br />
       <main className="main">
         <br />
@@ -325,17 +199,39 @@ const Home = () => {
             <option value="special"> For Special Child</option>
           </select>
         </div>
-      <div className="game-grid">
-        {filteredGames.map((game, index) => (
-          <div className="game-item" key={index}>
-            <Link
-              to={game.path}
-              className={`game-link ${game.path.substring(1)}`}
-            ></Link>
-            <div className="game-name">{game.name}</div>
-          </div>
-        ))}
-      </div>
+        <div className="game-grid">
+  {filteredGames.map((game, index) => (
+    <div className="game-item" key={index}>
+      {game.name === "Sign Language💌" || game.name === "Tic Tac Toe 🎫" || game.name === "Pong Game🧩" ? (
+        <div
+          className="game-link"
+          onClick={() => {
+            const externalLink =
+              game.name === "Sign Language💌"
+                ? "http://localhost:8501/" // Replace with the actual link for Sign Language
+                : game.name === "Tic Tac Toe 🎫"
+                ? "https://xoomgame.netlify.app/" // Replace with the actual link for Tic Tac Toe
+                : "https://pongggg.netlify.app/"; // Replace with the actual external link for Pong Game
+            window.open(externalLink, "_blank");
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          <div className="game-name">{game.name}</div>
+        </div>
+      ) : (
+        <Link
+          to={game.path}
+          className={`game-link ${game.path.substring(1)}`}
+        >
+          <div className="game-name">{game.name}</div>
+        </Link>
+      )}
+    </div>
+  ))}
+</div>
+
+
+
 
       {/* Premium Content Section */}
       <section className="premium-content">

@@ -1,20 +1,51 @@
 /* Center the game content */
+/* Instructions styling */
+.score-container {
+  margin: 20px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.speak-button {
+  margin: 15px 0;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.speak-button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+p {
+  font-size: 1.2rem;
+  color: #666; /* Slightly lighter color for instructions */
+  margin-bottom: 20px; /* Space between instructions and difficulty selector */
+}
 .game-container {
   text-align: center;
-  margin-top: 50px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #f9f9f9;
+  background-color: rgb(255, 255, 255);
+  margin: 0; /* Remove margins to allow full page coverage */
   padding: 20px;
+  max-width: 100%; /* Ensure it takes full width */
+  height: 100vh; /* Full viewport height */
+  /* background-image: url("../assets/sound.gif"); */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px #8e868633;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
 /* Main title styling */
 h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: #000000;
   margin-bottom: 20px;
 }
 
@@ -25,7 +56,7 @@ h1 {
 
 .word-container h2 {
   font-size: 2rem;
-  color: #555;
+  color: #000000;
 }
 
 .word-container span {
@@ -117,3 +148,4 @@ h1 {
     font-size: 1rem;
   }
 }
+
