@@ -3,15 +3,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(48, 47, 47);
+  background-color: rgb(255, 255, 255);
   padding: 20px;
+  height: 100vh; /* Make the container full height */
+  width: 100vw;  /* Make the container full width */
   font-family: Arial, sans-serif;
   background-image: none;
 }
 
 .video-frame {
-  width: 60%;
-  height: 400px;
+  width: 80%;
+  height: 500px;
   margin-bottom: 20px;
   border: 2px solid #551515;
   border-radius: 10px;

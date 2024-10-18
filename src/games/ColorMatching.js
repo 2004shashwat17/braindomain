@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ColorMatching.css';
+
 const stories = [
   {
     // title: 'Cyber Awareness',
@@ -138,12 +139,42 @@ const stories = [
   },
 ];
 
-
 const ColorMatching = () => {
   const [currentStory, setCurrentStory] = useState(0);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [difficulty, setDifficulty] = useState('easy');
+  const [videoEnded, setVideoEnded] = useState(false); // New state to track if video ended
+
+  useEffect(() => {
+    // Load YouTube IFrame API
+    const loadYouTubeAPI = () => {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    };
+
+    loadYouTubeAPI();
+
+    // This function will be called by the YouTube API once the video is done
+    window.onYouTubeIframeAPIReady = () => {
+      const player = new window.YT.Player('youtube-player', {
+        height: '390',
+        width: '640',
+        videoId: stories[currentStory].videoUrl.split('/').pop(),
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    };
+
+    const onPlayerStateChange = (event) => {
+      if (event.data === window.YT.PlayerState.ENDED) {
+        setVideoEnded(true); // Video ended, show questions
+      }
+    };
+  }, [currentStory]); // Re-run when currentStory changes
 
   const handleAnswer = (selectedOption) => {
     const correctAnswer = stories[currentStory].modes[difficulty][currentQuestion].correct;
@@ -157,6 +188,7 @@ const ColorMatching = () => {
     } else if (currentStory < stories.length - 1) {
       setCurrentStory(currentStory + 1);
       setCurrentQuestion(0);
+      setVideoEnded(false); // Reset video ended state for the next story
     } else {
       alert(`Game Over! Your score: ${score}/${stories.length * 5}`);
     }
@@ -166,37 +198,35 @@ const ColorMatching = () => {
     setDifficulty(event.target.value);
     setCurrentQuestion(0);
     setScore(0);
+    setVideoEnded(false); // Reset when changing difficulty
   };
 
   return (
     <div className="game-container">
       <h1>{stories[currentStory].title}</h1>
-      <iframe
-        className="video-frame"
-        src={stories[currentStory].videoUrl}
-        title={stories[currentStory].title}
-        allowFullScreen
-      ></iframe>
-      <div className="quiz-container">
-        <h2>{stories[currentStory].modes[difficulty][currentQuestion].question}</h2>
-        <div className="options">
-          {stories[currentStory].modes[difficulty][currentQuestion].options.map((option, index) => (
-            <button key={index} onClick={() => handleAnswer(option)}>
-              {option}
-            </button>
-          ))}
+
+      <div className="video-text">
+
+        <h2> 💫 STORY MODE 💫 </h2>
+    <p>Instructions : 🕹️</p>
+    <p>🏹 Learn From the Vedio and Answer the Questions ? </p>
+  </div>
+
+      <div id="youtube-player"></div> {/* YouTube player will be rendered here */}
+      {videoEnded && ( // Render questions only if the video has ended
+        <div className="quiz-container">
+          <h2>{stories[currentStory].modes[difficulty][currentQuestion].question}</h2>
+          <div className="options">
+            {stories[currentStory].modes[difficulty][currentQuestion].options.map((option, index) => (
+              <button key={index} onClick={() => handleAnswer(option)}>
+                {option}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       <div className="score">
         Current Score: {score}
-      </div>
-      <div className="difficulty-selector">
-        <label htmlFor="difficulty">Choose Difficulty:</label>
-        <select id="difficulty" value={difficulty} onChange={handleDifficultyChange}>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
       </div>
     </div>
   );

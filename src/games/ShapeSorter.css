@@ -4,10 +4,11 @@
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center content horizontally */
   justify-content: center; /* Center content vertically */
+  background-color: white;
 }
 
 .puzzle-game {
-  background: rgb(188, 188, 188);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,75,9,1) 35%, rgba(0,212,255,1) 100%);
   text-align: center;
 }
 

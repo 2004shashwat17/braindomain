@@ -15,25 +15,29 @@ const Home = () => {
   const navigate = useNavigate();
 
   const games = [
-    { name: "Memory Match🎯", path: "/memory-match", type: "normal" },
-    { name: "Shape Sorter🥙", path: "/shape-sorter", type: "normal" },
-    { name: "Social Awareness🚀", path: "/color-quiz", type: "normal" },
-    { name: "Number Sequencing⚙️", path: "/puzzle-game", type: "normal" },
-    { name: "Pong Game🧩", path: "/math-game", type: "normal" },
-    { name: "Maze Game🌽", path: "/maze", type: "normal" },
-    { name: "SoundBoard 🎼", path: "/soundboard", type: "special" },
-    { name: "Tic Tac Toe 🎫", path: "/word-search", type: "normal" },
-    { name: "Sign Language💌", path: "/letter", type: "special" },
-    { name: "Hand Writing🅰️", path: "/building", type: "special" },
-    { name: "Sound Identification🔊", path: "/sound", type: "special" },
+    { name: "Memory Match🎯", path: "/memory-match", type: "normal", forSpecial: true },
+    { name: "Shape Sorter🥙", path: "/shape-sorter", type: "normal", forSpecial: false },
+    { name: "Social Awareness🚀", path: "/color-quiz", type: "normal", forSpecial: false },
+    { name: "Number Sequencing⚙️", path: "/puzzle-game", type: "normal", forSpecial: true },
+    { name: "Pong Game🧩", path: "/math-game", type: "normal", forSpecial: false },
+    { name: "Maze Game🌽", path: "/maze", type: "normal", forSpecial: false },
+    { name: "SoundBoard 🎼", path: "/soundboard", type: "special", forSpecial: true },
+    { name: "Tic Tac Toe 🎫", path: "/word-search", type: "normal", forSpecial: false },
+    { name: "Sign Language💌", path: "/letter", type: "special", forSpecial: true },
+    { name: "Hand Writing🅰️", path: "/building", type: "special", forSpecial: true },
+    { name: "Sound Identification🔊", path: "/sound", type: "special", forSpecial: true },
   ];
+  
 
   useEffect(() => {
     const sortedGames = games
       .filter((game) => {
         if (sortCriteria === "all") return true;
         if (sortCriteria === "children" && game.type === "normal") return true;
-        if (sortCriteria === "special" && game.type === "special") return true;
+        if (sortCriteria === "special") {
+          // Show all "special" games and the ones marked for special children
+          return game.type === "special" || game.forSpecial;
+        }
         return false;
       })
       .sort((a, b) => {
@@ -41,9 +45,10 @@ const Home = () => {
         if (sortCriteria === "special" && b.type === "normal") return -1;
         return 0;
       });
-
+  
     setFilteredGames(sortedGames);
   }, [sortCriteria]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -130,16 +135,16 @@ const Home = () => {
   <nav className="header-nav2">
     <div className="header-rewards2">
       <br />
-      <Link to="/about" className="about-button2">Worksheets 📝</Link>
+      <Link to="https://www.education.com/worksheets/civics-government/" className="about-button2">Worksheets 📝</Link>
       {/* <Link to="/reward" className="about-button2">More Games🎯</Link> */}
       {/* <Link to="/score" className="about-button2">Lesson Plans🪙</Link> */}
-      <Link to="/score" className="about-button2">Activities😶‍🌫️</Link>
-      <Link to="/score" className="about-button2">Work Books📔</Link>
-      <Link to="/score" className="about-button2">Exercise⛹🏻‍♂️</Link>
+      <Link to="https://www.goodhousekeeping.com/home/craft-ideas/g1389/diy-kids-activities/" className="about-button2">Activities😶‍🌫️</Link>
+      <Link to="https://socialwelfare.tripura.gov.in/sites/default/files/Activity%20Book%20for%203-4%20years%20Children.pdf" className="about-button2">Work Books📔</Link>
+      <Link to="https://www.parents.com/exercises-for-kids-8642585" className="about-button2">Exercise⛹🏻‍♂️</Link>
       <br />
-      <Link to="/score" className="about-button2">Story💫</Link>
+      <Link to="https://www.freechildrenstories.com/kids-stories" className="about-button2">Story💫</Link>
       <br />
-      <Link to="/score" className="about-button2">Song🎶</Link>
+      <Link to="https://learnenglishkids.britishcouncil.org/listen-watch/songs" className="about-button2">Song🎶</Link>
     </div>
   </nav>
 </section>
@@ -202,7 +207,7 @@ const Home = () => {
         <div className="game-grid">
   {filteredGames.map((game, index) => (
     <div className="game-item" key={index}>
-      {game.name === "Sign Language💌" || game.name === "Tic Tac Toe 🎫" || game.name === "Pong Game🧩" ? (
+      {game.name === "Sign Language💌" || game.name === "Tic Tac Toe 🎫" || game.name === "Pong Game🧩" || game.name === "SoundBoard 🎼" ? (
         <div
           className="game-link"
           onClick={() => {
@@ -211,7 +216,9 @@ const Home = () => {
                 ? "http://localhost:8501/" // Replace with the actual link for Sign Language
                 : game.name === "Tic Tac Toe 🎫"
                 ? "https://xoomgame.netlify.app/" // Replace with the actual link for Tic Tac Toe
-                : "https://pongggg.netlify.app/"; // Replace with the actual external link for Pong Game
+                : game.name === "Pong Game🧩"
+                ? "https://pongggg.netlify.app/" // Replace with the actual external link for Pong Game
+                : "https://rococo-croquembouche-15610e.netlify.app"; // Replace with the actual external link for SoundBoard 🎼
             window.open(externalLink, "_blank");
           }}
           style={{ cursor: "pointer" }}
@@ -229,9 +236,6 @@ const Home = () => {
     </div>
   ))}
 </div>
-
-
-
 
       {/* Premium Content Section */}
       <section className="premium-content">

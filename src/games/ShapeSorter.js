@@ -84,15 +84,15 @@ const ShapeSorter = () => {
     <div className="puzzle-game">
       <br />
       <br />
-      <h2>Score: {score}</h2>
-      {message && <h3>{message}</h3>}
-
       {/* Instructions Section */}
       <div className="instructions">
         <h2>How to Play 🕹️</h2>
         <p>Drag the shape from the left column and drop it on the matching shape name in the right column. Your goal is to correctly match as many shapes as possible. Each correct match will increase your score!</p>
         <button onClick={readInstructions}>Read Instructions</button> {/* Speech Button */}
       </div>
+<br />
+<h2>Score: {score}</h2>
+      {message && <h3>{message}</h3>}
 
       <div className="puzzle-container">
         <div className="shape-column">
